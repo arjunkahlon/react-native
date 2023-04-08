@@ -29,7 +29,7 @@
 - [x] Section 1: Getting Started
 - [x] Section 2: React Native Basics
 - [x] Section 3: Debugging React Native Apps 
-- [ ] Section 4: Dive Deeper into Components, Layout, & Styling
+- [x] Section 4: Dive Deeper into Components, Layout, & Styling
 - [ ] Section 5: Building Adaptive User Interfaces
 - [ ] Section 6: React Native Navigation with React Navigation [Meals App]
 - [ ] Section 7: App-wide State Management with Redux & Context
