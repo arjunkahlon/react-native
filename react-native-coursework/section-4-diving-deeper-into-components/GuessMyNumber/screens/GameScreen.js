@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, FlatList } from "react-native";
 import { Ionicons } from '@expo/vector-icons'
 
 import Title from "../components/ui/Title";
@@ -7,6 +7,7 @@ import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
+import GuessLogItem from "../components/game/GuessLogItem";
 import generateRandomBetween from "../utilities/generate-random-between";
 
 let minBoundary = 1;
@@ -16,12 +17,18 @@ function GameScreen({ userNumber, onGameOver }) {
   const [currentGuess, setCurrentGuess] = useState(() => (
     generateRandomBetween(minBoundary, maxBoundary, userNumber)
   ));
+  const [guessRounds, setGuessRounds] = useState([currentGuess]);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
       onGameOver();
     }
-  }, [currentGuess, userNumber, onGameOver])
+  }, [currentGuess, userNumber, onGameOver]);
+
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100
+  }, []);
 
   function nextGuessHandler(direction) {
     if (
@@ -41,7 +48,10 @@ function GameScreen({ userNumber, onGameOver }) {
     }
     const newGuess = generateRandomBetween(minBoundary, maxBoundary, currentGuess);
     setCurrentGuess(newGuess);
+    setGuessRounds(prevGuessRounds => [newGuess, ...prevGuessRounds]);
   };
+
+  const guessRoundsListLength = guessRounds.length;
 
   return (
     <View style={styles.screen}>
@@ -62,6 +72,19 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
+      <View>
+        {/* {guessRounds.map(guessRound => <Text key={guessRound}>{guessRound}</Text>)} */}
+        <FlatList 
+          data={guessRounds} 
+          renderItem={(itemData) => (
+            <GuessLogItem 
+              roundNumber={guessRoundsListLength - itemData.index} 
+              guess={itemData.item}
+            />
+          )}
+          keyExtractor={(item) => item} 
+        />
+      </View>
     </View>
   );
 };
