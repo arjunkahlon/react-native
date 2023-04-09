@@ -6,7 +6,6 @@ function generateRandomBetween(min, max, exclude) {
   } else {
     return rndNum;
   }
-
 }
 
 export default generateRandomBetween;
