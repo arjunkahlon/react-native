@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { View, StyleSheet, Alert, FlatList, useWindowDimensions } from "react-native";
 import { Ionicons } from '@expo/vector-icons'
 
-import Title from "../components/ui/Title";
+import Title from "../components/ui/Title.android";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
@@ -10,14 +10,19 @@ import InstructionText from "../components/ui/InstructionText";
 import GuessLogItem from "../components/game/GuessLogItem";
 import generateRandomBetween from "../utilities/generate-random-between";
 
-let minBoundary = 1;
-let maxBoundary = 100;
+interface GameScreenProps {
+  userNumber: number,
+  onGameOver: (numberOfRounds: number) => void
+}
 
-function GameScreen({ userNumber, onGameOver }) {
-  const [currentGuess, setCurrentGuess] = useState(() => (
+let minBoundary: number = 1;
+let maxBoundary: number = 100;
+
+function GameScreen({ userNumber, onGameOver }: GameScreenProps) {
+  const [currentGuess, setCurrentGuess] = useState<number>(() => (
     generateRandomBetween(minBoundary, maxBoundary, userNumber)
   ));
-  const [guessRounds, setGuessRounds] = useState([currentGuess]);
+  const [guessRounds, setGuessRounds] = useState<number[]>([currentGuess]);
   const { width, height } = useWindowDimensions();
 
   useEffect(() => {
@@ -31,7 +36,7 @@ function GameScreen({ userNumber, onGameOver }) {
     maxBoundary = 100
   }, []);
 
-  function nextGuessHandler(direction) {
+  function nextGuessHandler(direction: string) {
     if (
         (direction === 'lower' && currentGuess < userNumber) ||
         (direction === 'greater' && currentGuess > userNumber)
@@ -52,7 +57,7 @@ function GameScreen({ userNumber, onGameOver }) {
     setGuessRounds(prevGuessRounds => [newGuess, ...prevGuessRounds]);
   };
 
-  const guessRoundsListLength = guessRounds.length;
+  const guessRoundsListLength: number = guessRounds.length;
 
   let content = (
     <>
@@ -61,12 +66,12 @@ function GameScreen({ userNumber, onGameOver }) {
           <InstructionText style={styles.instructionText}>Higher or Lower?</InstructionText>
           <View style={styles.buttonsContainer}>
             <View style={styles.buttonContainer}>
-              <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+              <PrimaryButton onPress={() => nextGuessHandler('lower')}>
                 <Ionicons name="md-remove" size={24} color="white" />
               </PrimaryButton>
             </View>
             <View style={styles.buttonContainer}>
-              <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+              <PrimaryButton onPress={() => nextGuessHandler('greater')}>
                 <Ionicons name="md-add" size={24} color="white" />
               </PrimaryButton>
             </View>
@@ -80,13 +85,13 @@ function GameScreen({ userNumber, onGameOver }) {
       <>
         <View style={styles.buttonsContainerWide}>
           <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+            <PrimaryButton onPress={() => nextGuessHandler('lower')}>
               <Ionicons name="md-remove" size={24} color="white" />
             </PrimaryButton>
           </View>
           <NumberContainer>{currentGuess}</NumberContainer>
           <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+            <PrimaryButton onPress={() => nextGuessHandler('greater')}>
               <Ionicons name="md-add" size={24} color="white" />
             </PrimaryButton>
           </View>
@@ -108,7 +113,7 @@ function GameScreen({ userNumber, onGameOver }) {
               guess={itemData.item}
             />
           )}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.toString()}
         />
       </View>
     </View>

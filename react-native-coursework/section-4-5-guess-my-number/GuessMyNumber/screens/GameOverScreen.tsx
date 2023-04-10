@@ -7,14 +7,20 @@ import {
   useWindowDimensions 
 } from "react-native";
 
-import Title from "../components/ui/Title";
-import Colors from "../constants/colors";
+import Title from "../components/ui/Title.android";
+import Colors from "../constants/colors.ios";
 import PrimaryButton from "../components/ui/PrimaryButton";
 
-function GameOverScreen({roundsNumber, userNumber, onRestart}) {
+interface GameOverScreenProps {
+  roundsNumber: number,
+  userNumber: number,
+  onRestart: () => void
+}
+
+function GameOverScreen({roundsNumber, userNumber, onRestart}: GameOverScreenProps) {
   const { width, height } = useWindowDimensions();
 
-  let imageSize = 300;
+  let imageSize: number = 300;
 
   if (width < 380) {
     imageSize = 150;
