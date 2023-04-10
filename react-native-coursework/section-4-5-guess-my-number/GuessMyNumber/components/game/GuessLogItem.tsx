@@ -1,11 +1,16 @@
 import { View, Text, StyleSheet } from "react-native";
-import Colors from "../../constants/colors";
+import Colors from "../../constants/colors.ios";
 
-function GuessLogItem({roundNumber, guess}) {
+interface LogItemProps {
+  roundNumber: number,
+  guess: number
+}
+
+function GuessLogItem({roundNumber, guess}: LogItemProps) {
   return(
     <View style={styles.listItem}>
       <Text style={styles.itemText}>#{roundNumber}</Text>
-      <Text style={StyleSheet.itemText}>Opponent's Guess: {guess}</Text>
+      <Text style={styles.itemText}>Opponent's Guess: {guess}</Text>
     </View>
   );
 }

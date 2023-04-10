@@ -1,8 +1,14 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, GestureResponderEvent } from "react-native";
+import { ReactNode } from "react";
 
-import Colors from "../../constants/colors";
+import Colors from "../../constants/colors.ios";
 
-function PrimaryButton({children, onPress}) {
+interface ButtonProps {
+	children: ReactNode,
+	onPress: (event: GestureResponderEvent) => void
+}
+
+function PrimaryButton({children, onPress}: ButtonProps) {
 	return (
 		<View style={styles.buttonOuterContainer}>
 			<Pressable

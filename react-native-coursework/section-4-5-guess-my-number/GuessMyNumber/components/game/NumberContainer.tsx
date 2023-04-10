@@ -1,8 +1,13 @@
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 
-import Colors from "../../constants/colors";
+import Colors from "../../constants/colors.ios";
+import { ReactNode } from "react";
 
-function NumberContainer({children}) {
+interface NumberContainerProps {
+  children: ReactNode
+}
+
+function NumberContainer({children}: NumberContainerProps) {
   return(
     <View style={styles.container}>
       <Text style={styles.numberText}>{children}</Text>
@@ -12,7 +17,7 @@ function NumberContainer({children}) {
 
 export default NumberContainer;
 
-const deviceWidth = Dimensions.get('window').width;
+const deviceWidth: number = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {

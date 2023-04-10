@@ -10,17 +10,21 @@ import {
 } from "react-native";
 
 import PrimaryButton from "../components/ui/PrimaryButton";
-import Title from "../components/ui/Title";
+import Title from "../components/ui/Title.android";
 import InstructionText from "../components/ui/InstructionText";
 import Card from "../components/ui/Card";
-import Colors from "../constants/colors";
+import Colors from "../constants/colors.ios";
 
-function StartGameScreen({onPickNumber}) {
-	const [enteredNumber, setEnteredNumber] = useState('');
+interface StartGameScreenProps {
+	onPickNumber: (pickedNumber: number) => void
+}
+
+function StartGameScreen({onPickNumber}: StartGameScreenProps) {
+	const [enteredNumber, setEnteredNumber] = useState<string>('');
 
 	const {height} = useWindowDimensions();
 
-	function numberInputHandler(enteredText) {
+	function numberInputHandler(enteredText: string) {
 		setEnteredNumber(enteredText);
 	}
 
@@ -29,9 +33,9 @@ function StartGameScreen({onPickNumber}) {
 	}
 
 	function confirmInputHandler() {
-		const number = parseInt(enteredNumber);
+		const inputNumber: number = parseInt(enteredNumber);
 
-		if (isNaN(number) || number <= 0 || number > 99) {
+		if (isNaN(inputNumber) || inputNumber <= 0 || inputNumber > 99) {
 			Alert.alert(
 				'Invalid number', 
 				'Number has to be a number between 1 and 99',
@@ -43,10 +47,10 @@ function StartGameScreen({onPickNumber}) {
 			);
 			return;
 		}
-		onPickNumber(number);
+		onPickNumber(inputNumber);
 	}
 
-	const marginTopDistance = height < 430 ? 30 : 100;
+	const marginTopDistance: number = height < 430 ? 30 : 100;
 
 	return (
 		<ScrollView style={styles.screen}>

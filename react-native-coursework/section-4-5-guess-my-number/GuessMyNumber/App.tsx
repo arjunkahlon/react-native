@@ -8,12 +8,12 @@ import { StatusBar } from 'expo-status-bar';
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
 import GameOverScreen from './screens/GameOverScreen';
-import Colors from './constants/colors';
+import Colors from './constants/colors.ios';
 
 export default function App() {
-  const [userNumber, setUserNumber] = useState();
-  const [gameIsOver, setGameIsOver] = useState(true);
-  const [guessRounds, setGuessRounds] = useState(0);
+  const [userNumber, setUserNumber] = useState<number | null>();
+  const [gameIsOver, setGameIsOver] = useState<boolean>(true);
+  const [guessRounds, setGuessRounds] = useState<number>(0);
 
   const [fontsLoaded] = useFonts({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -24,12 +24,12 @@ export default function App() {
     return <AppLoading />;
   }
 
-  function pickedNumberHandler(pickedNumber) {
+  function pickedNumberHandler(pickedNumber: number) {
     setUserNumber(pickedNumber);
     setGameIsOver(false);
   }
 
-  function gameOverHandler(numberOfRounds) {
+  function gameOverHandler(numberOfRounds: number) {
     setGameIsOver(true);
     setGuessRounds(numberOfRounds);
   }
@@ -41,7 +41,7 @@ export default function App() {
 
   let screen = <StartGameScreen 
                 onPickNumber={pickedNumberHandler}
-              />;
+                />;
 
   if (userNumber) {
     screen = <GameScreen 

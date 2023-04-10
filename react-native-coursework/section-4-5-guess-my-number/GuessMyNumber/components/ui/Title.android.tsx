@@ -1,7 +1,11 @@
 import { StyleSheet, Text, Platform } from "react-native";
+import { ReactNode } from "react";
 
+interface TitleProps {
+  children: ReactNode
+}
 
-function Title({children}) {
+function Title({children}: TitleProps) {
   return <Text style={styles.title}>{children}</Text>
 
 }
