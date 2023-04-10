@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Alert, FlatList } from "react-native";
+import { View, StyleSheet, Alert, FlatList } from "react-native";
 import { Ionicons } from '@expo/vector-icons'
 
 import Title from "../components/ui/Title";
@@ -93,7 +93,8 @@ export default GameScreen;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 24
+    padding: 24,
+    alignItems: 'center'
   },
   instructionText: {
     marginBottom: 12,
