@@ -6,16 +6,17 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 type RootStackParamList = {
   MealsCategories: undefined;
-  MealsOverview: undefined;
+  MealsOverview: {categoryId: string};
 };
 
 type Props = NativeStackScreenProps<RootStackParamList, 'MealsCategories', 'MealsOverview'>;
 
 function CategoriesScreen({ navigation }: Props) {
 
-  function pressHandler() {
-    console.log('here');
-    navigation.navigate('MealsOverview');
+  function pressHandler(id: string) {
+    navigation.navigate('MealsOverview', {
+      categoryId: id
+    });
   }
 
   return <FlatList 
@@ -26,7 +27,7 @@ function CategoriesScreen({ navigation }: Props) {
             return <CategoryGridTitle 
                       title={item.title} 
                       color={item.color}
-                      onPress={pressHandler}
+                      onPress={(event) => pressHandler(item.id)}
                     />
           }}
           numColumns={2}

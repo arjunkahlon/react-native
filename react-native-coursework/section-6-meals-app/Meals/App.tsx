@@ -9,7 +9,7 @@ import MealsOverviewScreen from './screens/MealsOverviewScreen';
 
 type RootStackParamList = {
   MealsCategories: undefined;
-  MealsOverview: undefined;
+  MealsOverview: {categoryId: string};
 };
 
 
