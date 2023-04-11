@@ -22,7 +22,13 @@ function MealsOverviewScreen({ route }: Props) {
   });
 
   function renderMealItem(item: Meal) {
-    return <MealItem title={item.title} />
+    return <MealItem 
+            title={item.title}
+            imageUrl={item.imageUrl}
+            duration={item.duration}
+            complexity={item.complexity}
+            affordability={item.affordability} 
+           />
   }
 
   return (
