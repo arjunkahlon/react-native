@@ -5,9 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import CategoriesScreen from './screens/CategoriesScreen';
+import MealsOverviewScreen from './screens/MealsOverviewScreen';
 
 type RootStackParamList = {
   MealsCategories: undefined;
+  MealsOverview: undefined;
 };
 
 
@@ -23,6 +25,10 @@ export default function App() {
           <RootStack.Screen
             name='MealsCategories'
             component={CategoriesScreen}
+          />
+           <RootStack.Screen
+            name='MealsOverview'
+            component={MealsOverviewScreen}
           />
         </RootStack.Navigator>
       </NavigationContainer>
