@@ -19,7 +19,7 @@ const RootStack = createStackNavigator<RootStackParamList>();
 export default function App() {
   return (
     <>
-      <StatusBar style='dark'/>
+      <StatusBar style='light'/>
       <NavigationContainer>
         <RootStack.Navigator
           screenOptions={{
@@ -28,7 +28,7 @@ export default function App() {
             },
             headerTintColor: 'white',
             cardStyle: {
-              backgroundColor: '#3f2f25'
+              backgroundColor: 'black'
             }
           }}
         >
