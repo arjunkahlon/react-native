@@ -6,10 +6,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import CategoriesScreen from './screens/CategoriesScreen';
 import MealsOverviewScreen from './screens/MealsOverviewScreen';
+import MealDetailScreen from './screens/MealDetailScreen';
 
 type RootStackParamList = {
   MealsCategories: undefined;
   MealsOverview: {categoryId: string};
+  MealDetail: {mealId: string}
 };
 
 
@@ -43,6 +45,11 @@ export default function App() {
             name='MealsOverview'
             component={MealsOverviewScreen}
           />
+          <RootStack.Screen 
+            name='MealDetail'
+            component={MealDetailScreen}
+          />
+          
         </RootStack.Navigator>
       </NavigationContainer>
     </>

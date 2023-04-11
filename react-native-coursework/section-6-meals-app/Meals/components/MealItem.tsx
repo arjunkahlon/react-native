@@ -1,6 +1,8 @@
 import { View, Text, Pressable, Image, StyleSheet, Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 interface MealItemProps {
+  id: string,
   title: string,
   imageUrl: string,
   duration: number,
@@ -9,11 +11,20 @@ interface MealItemProps {
 }
 
 function MealItem(item: MealItemProps) {
+  const navigation = useNavigation();
+
+  function selectMealItemHandler(id: string) {
+    navigation.navigate('MealDetail' as never, {
+      mealId: id
+    } as never)
+  }
+  
   return (
     <View style={styles.mealItem}>
       <Pressable
         android_ripple={{color: '#ccc'}}
         style={({pressed}) => pressed ? styles.buttonPressed : null}
+        onPress={() => selectMealItemHandler(item.id)}
       >
         <View style={styles.innerContainer}>
           <View>
