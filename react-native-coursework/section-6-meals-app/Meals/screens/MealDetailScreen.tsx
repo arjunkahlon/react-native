@@ -1,12 +1,13 @@
+import { useLayoutEffect } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
+import IconButton from "../components/IconButton";
 
 import { MEALS } from "../data/meal-data";
-import Meal from "../models/meal";
 
 type RootStackParamList = {
   MealsCategories: undefined;
@@ -24,9 +25,29 @@ function findMeal(mealId: string) {
   return meal;
 }
 
-function MealDetailScreen( {route}: Props) {
+function MealDetailScreen( {route, navigation}: Props) {
   const mealId: string = route.params.mealId;
   const selectedMeal = findMeal(mealId);
+
+  function headerButtonPressHandler() {
+    console.log('Pressed!');
+  }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: 'Meal Details',
+      headerRight: () => {
+        return( 
+                <View style={styles.headerIconContainer}>
+                  <IconButton iconName="star"
+                              onPress={headerButtonPressHandler}
+                              color={'white'}
+                  />
+                </View>
+              )
+      }
+    })
+  }, [navigation, headerButtonPressHandler]);
 
   return(
     <ScrollView style={styles.rootContainer}>
@@ -76,5 +97,8 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     width: '80%'
+  },
+  headerIconContainer: {
+    paddingHorizontal: 25
   }
 })
