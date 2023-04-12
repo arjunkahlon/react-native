@@ -35,7 +35,7 @@ function MealDetailScreen( {route, navigation}: Props) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: 'Meal Details',
+      headerTitle: selectedMeal.title,
       headerRight: () => {
         return( 
                 <View style={styles.headerIconContainer}>
