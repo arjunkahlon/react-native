@@ -3,21 +3,16 @@ import { CATEGORIES } from "../data/meal-data";
 import Category from "../models/category";
 import CategoryGridTitle from "../components/CategoryGridTile";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useNavigation } from "@react-navigation/native";
 
-type RootStackParamList = {
-  MealsCategories: undefined;
-  MealsOverview: {categoryId: string};
-  MealDetail: {mealId: string}
-};
+function CategoriesScreen() {
 
-type Props = NativeStackScreenProps<RootStackParamList, 'MealsCategories', 'MealsOverview'>;
-
-function CategoriesScreen({ navigation }: Props) {
+  const navigation = useNavigation();
 
   function pressHandler(id: string) {
-    navigation.navigate('MealsOverview', {
+    navigation.navigate('MealsOverview' as never, {
       categoryId: id
-    });
+    } as never);
   }
 
   return <FlatList 
