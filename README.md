@@ -31,8 +31,8 @@
 - [x] Section 3: Debugging React Native Apps 
 - [x] Section 4: Dive Deeper into Components, Layout, & Styling
 - [x] Section 5: Building Adaptive User Interfaces
-- [x] Section 6: React Native Navigation with React Navigation [Meals App]
-- [ ] Section 7: App-wide State Management with Redux & Context
+- [x] Section 6: React Native Navigation with React Navigation
+- [x] Section 7: App-wide State Management with Redux & Context
 - [ ] Section 8: Time To Practice - The Expense Tracker App
 - [ ] Section 9: Handling User Input
 - [ ] Section 10: Sending HTTP Requests
@@ -50,7 +50,6 @@
 [My Notes from my Coursework](https://github.com/arjunkahlon/react-native-notes)
 
 
-
 ## Projects
 
 ### Meals
@@ -60,9 +59,8 @@ select a meal, and view a list of ingredients and steps to make this meal.
 
 [Project Source Code](https://github.com/arjunkahlon/react-native/tree/main/react-native-coursework/section-6-meals-app/Meals)
 
-![category-screen](https://user-images.githubusercontent.com/49361894/231326843-07fb068a-530d-4a43-b58b-558611813edc.gif)
-![navigation](https://user-images.githubusercontent.com/49361894/231326744-3cdf4585-847c-47d5-8aa8-6118ea7818d1.gif)
-![meal-details](https://user-images.githubusercontent.com/49361894/231326752-04fb5543-05aa-4d7b-bbee-8134b63da08d.gif)
+![meals-demonstration](https://user-images.githubusercontent.com/49361894/231561904-8e8dfefd-51e9-43a0-80ca-fa373f131c3a.gif)
+
 
 ### GuessMyNumber
 
