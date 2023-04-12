@@ -30,7 +30,7 @@ export default function App() {
             },
             headerTintColor: 'white',
             cardStyle: {
-              backgroundColor: 'gray'
+              backgroundColor: 'black'
             }
           }}
         >
