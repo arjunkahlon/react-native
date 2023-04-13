@@ -1,4 +1,5 @@
 import { useLayoutEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -6,6 +7,8 @@ import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
 import IconButton from "../components/IconButton";
+import { store } from "../store/redux/store";
+import { addFavorite, removeFavorite } from "../store/redux/favorites";
 
 import { MEALS } from "../data/meal-data";
 
@@ -16,6 +19,7 @@ type RootStackParamList = {
 };
 
 type Props = NativeStackScreenProps<RootStackParamList, 'MealDetail'>;
+type RootState = ReturnType<typeof store.getState>
 
 function findMeal(mealId: string) {
   function assert(value: unknown): asserts value {}
@@ -26,11 +30,20 @@ function findMeal(mealId: string) {
 }
 
 function MealDetailScreen( {route, navigation}: Props) {
+  const favoriteMealIds = useSelector((state: RootState) => state.favoriteMeals.ids);
+  const dispatch = useDispatch();
+
   const mealId: string = route.params.mealId;
   const selectedMeal = findMeal(mealId);
 
-  function headerButtonPressHandler() {
-    console.log('Pressed!');
+  const mealIsFavorite: boolean = favoriteMealIds.includes(mealId);
+
+  function changeFavoriteStatusHandler() {
+    if (mealIsFavorite) {
+      dispatch(removeFavorite({ id: mealId }))
+    } else {
+      dispatch(addFavorite({ id: mealId }));
+    }
   }
 
   useLayoutEffect(() => {
@@ -39,15 +52,15 @@ function MealDetailScreen( {route, navigation}: Props) {
       headerRight: () => {
         return( 
                 <View style={styles.headerIconContainer}>
-                  <IconButton iconName="star"
-                              onPress={headerButtonPressHandler}
+                  <IconButton iconName={mealIsFavorite ? 'star' : 'star-outline'}
+                              onPress={changeFavoriteStatusHandler}
                               color={'white'}
                   />
                 </View>
               )
       }
     })
-  }, [navigation, headerButtonPressHandler]);
+  }, [navigation, changeFavoriteStatusHandler]);
 
   return(
     <ScrollView style={styles.rootContainer}>
@@ -99,6 +112,6 @@ const styles = StyleSheet.create({
     width: '80%'
   },
   headerIconContainer: {
-    paddingHorizontal: 25
+    paddingHorizontal: 20
   }
 })

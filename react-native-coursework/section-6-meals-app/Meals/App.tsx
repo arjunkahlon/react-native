@@ -1,12 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
-
+import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { DrawerContent, createDrawerNavigator } from "@react-navigation/drawer";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import "react-native-gesture-handler";
+import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons'
 
+import { store } from './store/redux/store';
 import CategoriesScreen from './screens/CategoriesScreen';
 import MealsOverviewScreen from './screens/MealsOverviewScreen';
 import MealDetailScreen from './screens/MealDetailScreen';
@@ -17,8 +18,6 @@ type RootStackParamList = {
   MealsOverview: {categoryId: string};
   MealDetail: {mealId: string}
 };
-
-
 
 const RootStack = createStackNavigator<RootStackParamList>();
 const Drawer = createDrawerNavigator();
@@ -62,44 +61,45 @@ function DrawerNavigator() {
       />
     </Drawer.Navigator>
   )
-
 }
 
 export default function App() {
   return (
     <>
       <StatusBar style='light'/>
-      <NavigationContainer>
-        <RootStack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: '#351401',
-            },
-            headerTintColor: 'white',
-            cardStyle: {
-              backgroundColor: 'black'
-            }
-          }}
-        >
-          <RootStack.Screen
-            name='Drawer'
-            component={DrawerNavigator}
-            options={{
-              title: 'Categories',
-              headerShown: false
+      <Provider store={store}>
+        <NavigationContainer>
+          <RootStack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#351401',
+              },
+              headerTintColor: 'white',
+              cardStyle: {
+                backgroundColor: 'black'
+              }
             }}
-          />
-           <RootStack.Screen
-            name='MealsOverview'
-            component={MealsOverviewScreen}
-          />
-          <RootStack.Screen 
-            name='MealDetail'
-            component={MealDetailScreen}
-          />
-          
-        </RootStack.Navigator>
-      </NavigationContainer>
+          >
+            <RootStack.Screen
+              name='Drawer'
+              component={DrawerNavigator}
+              options={{
+                title: 'Categories',
+                headerShown: false
+              }}
+            />
+             <RootStack.Screen
+              name='MealsOverview'
+              component={MealsOverviewScreen}
+            />
+            <RootStack.Screen
+              name='MealDetail'
+              component={MealDetailScreen}
+            />
+        
+          </RootStack.Navigator>
+        </NavigationContainer>
+      </Provider>
     </>
   );
 }
