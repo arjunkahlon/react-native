@@ -1,4 +1,5 @@
-import { useContext, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -6,8 +7,9 @@ import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
 import IconButton from "../components/IconButton";
+import { store } from "../store/redux/store";
+import { addFavorite, removeFavorite } from "../store/redux/favorites";
 
-import { FavoritesContext } from "../store/context/FavoritesContext";
 import { MEALS } from "../data/meal-data";
 
 type RootStackParamList = {
@@ -17,6 +19,7 @@ type RootStackParamList = {
 };
 
 type Props = NativeStackScreenProps<RootStackParamList, 'MealDetail'>;
+type RootState = ReturnType<typeof store.getState>
 
 function findMeal(mealId: string) {
   function assert(value: unknown): asserts value {}
@@ -27,18 +30,19 @@ function findMeal(mealId: string) {
 }
 
 function MealDetailScreen( {route, navigation}: Props) {
-  const favoriteMealContext = useContext(FavoritesContext);
+  const favoriteMealIds = useSelector((state: RootState) => state.favoriteMeals.ids);
+  const dispatch = useDispatch();
 
   const mealId: string = route.params.mealId;
   const selectedMeal = findMeal(mealId);
 
-  const mealIsFavorite: boolean = favoriteMealContext.ids.includes(mealId);
+  const mealIsFavorite: boolean = favoriteMealIds.includes(mealId);
 
   function changeFavoriteStatusHandler() {
     if (mealIsFavorite) {
-      favoriteMealContext.removeFavorite(mealId);
+      dispatch(removeFavorite({ id: mealId }))
     } else {
-      favoriteMealContext.addFavorite(mealId);
+      dispatch(addFavorite({ id: mealId }));
     }
   }
 

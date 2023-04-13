@@ -2,7 +2,6 @@ import { FlatList, ListRenderItemInfo } from "react-native";
 import { CATEGORIES } from "../data/meal-data";
 import Category from "../models/category";
 import CategoryGridTitle from "../components/CategoryGridTile";
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNavigation } from "@react-navigation/native";
 
 function CategoriesScreen() {

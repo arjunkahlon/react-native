@@ -5,7 +5,7 @@ import { GestureResponderEvent } from 'react-native'
 type IconName = React.ComponentProps<typeof Ionicons>['name'];
 
 interface IconButtonProps {
-  iconName: IconName;
+  iconName: IconName,
   onPress: (event: GestureResponderEvent) => void,
   color: string
 }

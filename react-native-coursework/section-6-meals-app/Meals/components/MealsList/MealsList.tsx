@@ -1,7 +1,6 @@
 import {View, FlatList, StyleSheet} from 'react-native';
 
 import MealItem from '../MealItem';
-
 import Meal from '../../models/meal';
 
 interface MealsListProps {
@@ -29,7 +28,7 @@ function MealsList({items}: MealsListProps) {
         renderItem={(itemData) => renderMealItem(itemData.item)}
       />
     </View>
-  )
+  );
 }
 
 export default MealsList;

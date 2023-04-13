@@ -1,5 +1,4 @@
 import { useLayoutEffect } from "react";
-import { View, FlatList } from "react-native"
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { MEALS } from "../data/meal-data"

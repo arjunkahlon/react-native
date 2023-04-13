@@ -29,5 +29,4 @@ const styles = StyleSheet.create({
     color: '#351401',
     textAlign: 'center'
   }
-
 })
