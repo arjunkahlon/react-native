@@ -33,7 +33,7 @@
 - [x] Section 5: Building Adaptive User Interfaces
 - [x] Section 6: React Native Navigation with React Navigation
 - [x] Section 7: App-wide State Management with Redux & Context
-- [ ] Section 8: Time To Practice - The Expense Tracker App
+- [x] Section 8: Time To Practice - The Expense Tracker App
 - [ ] Section 9: Handling User Input
 - [ ] Section 10: Sending HTTP Requests
 - [ ] Section 11: User Authentication
@@ -59,7 +59,8 @@ select a meal, and view a list of ingredients and steps to make this meal.
 
 [Project Source Code](https://github.com/arjunkahlon/react-native/tree/main/react-native-coursework/section-6-meals-app/Meals)
 
-![meals-demonstration](https://user-images.githubusercontent.com/49361894/231561904-8e8dfefd-51e9-43a0-80ca-fa373f131c3a.gif)
+![meals-app-navigation](https://user-images.githubusercontent.com/49361894/231905264-15dc7e3c-4a6d-4d9f-b93c-d1eec1e00b46.gif)
+![favorites](https://user-images.githubusercontent.com/49361894/231905283-4654ead4-f9c1-407e-adb4-2c25757fa215.gif)
 
 
 ### GuessMyNumber
