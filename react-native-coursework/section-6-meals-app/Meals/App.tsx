@@ -7,6 +7,7 @@ import { DrawerContent, createDrawerNavigator } from "@react-navigation/drawer";
 import "react-native-gesture-handler";
 import { Ionicons } from '@expo/vector-icons'
 
+import FavoritesContextProvider from './store/context/FavoritesContext';
 import CategoriesScreen from './screens/CategoriesScreen';
 import MealsOverviewScreen from './screens/MealsOverviewScreen';
 import MealDetailScreen from './screens/MealDetailScreen';
@@ -69,37 +70,39 @@ export default function App() {
   return (
     <>
       <StatusBar style='light'/>
-      <NavigationContainer>
-        <RootStack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: '#351401',
-            },
-            headerTintColor: 'white',
-            cardStyle: {
-              backgroundColor: 'black'
-            }
-          }}
-        >
-          <RootStack.Screen
-            name='Drawer'
-            component={DrawerNavigator}
-            options={{
-              title: 'Categories',
-              headerShown: false
+      <FavoritesContextProvider>
+        <NavigationContainer>
+          <RootStack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#351401',
+              },
+              headerTintColor: 'white',
+              cardStyle: {
+                backgroundColor: 'black'
+              }
             }}
-          />
-           <RootStack.Screen
-            name='MealsOverview'
-            component={MealsOverviewScreen}
-          />
-          <RootStack.Screen 
-            name='MealDetail'
-            component={MealDetailScreen}
-          />
-          
-        </RootStack.Navigator>
-      </NavigationContainer>
+          >
+            <RootStack.Screen
+              name='Drawer'
+              component={DrawerNavigator}
+              options={{
+                title: 'Categories',
+                headerShown: false
+              }}
+            />
+             <RootStack.Screen
+              name='MealsOverview'
+              component={MealsOverviewScreen}
+            />
+            <RootStack.Screen
+              name='MealDetail'
+              component={MealDetailScreen}
+            />
+        
+          </RootStack.Navigator>
+        </NavigationContainer>
+      </FavoritesContextProvider>
     </>
   );
 }
