@@ -112,6 +112,6 @@ const styles = StyleSheet.create({
     width: '80%'
   },
   headerIconContainer: {
-    paddingHorizontal: 25
+    paddingHorizontal: 20
   }
 })
