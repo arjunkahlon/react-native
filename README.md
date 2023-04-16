@@ -57,7 +57,7 @@
 A React Native + TypeScript application with which a user can browse a grid of food categories, select a category, view meals of that category,
 select a meal, and view a list of ingredients and steps to make this meal.
 
-[Project Source Code](https://github.com/arjunkahlon/react-native/tree/main/react-native-coursework/section-6-meals-app/Meals)
+[Project Source Code](https://github.com/arjunkahlon/react-native/tree/main/react-native-projects/meals-app/Meals)
 
 ![meals-app-navigation](https://user-images.githubusercontent.com/49361894/231905264-15dc7e3c-4a6d-4d9f-b93c-d1eec1e00b46.gif)
 ![favorites](https://user-images.githubusercontent.com/49361894/231905283-4654ead4-f9c1-407e-adb4-2c25757fa215.gif)
@@ -68,7 +68,7 @@ select a meal, and view a list of ingredients and steps to make this meal.
 A React Native + TypeScript application in which a user chooses a number between 1 and 99, and provides hints (higher or lower) to the application
 trying to guess this number. Game is adaptable on both portrait and landscape modes.
 
-[Project Source Code](https://github.com/arjunkahlon/react-native/tree/main/react-native-coursework/section-4-5-guess-my-number/GuessMyNumber)
+[Project Source Code](https://github.com/arjunkahlon/react-native/tree/main/react-native-projects/guess-my-number/GuessMyNumber)
 
 ![230772378-7a401063-3ba0-490b-b3c1-0d418c0d1122](https://user-images.githubusercontent.com/49361894/231327222-4f80e802-bfd0-406c-be89-f8278778a4c3.gif)
 ![230772395-c48288c8-4827-4e67-85f8-8906dcda24c6](https://user-images.githubusercontent.com/49361894/231327229-d61b7fb2-23b3-43b5-8f13-8d81b367c764.gif)
@@ -80,7 +80,7 @@ trying to guess this number. Game is adaptable on both portrait and landscape mo
 A simple React Native + JavaScript application in which a user can create a goal, view and scroll through their list of goals, and 
 delete a goal by tapping on it.
 
-[Project Source Code](https://github.com/arjunkahlon/react-native/tree/main/react-native-coursework/section-2-react-native-basics/CourseGoals)
+[Project Source Code](https://github.com/arjunkahlon/react-native/tree/main/react-native-projects/course-goals/CourseGoals)
 
 ![add-goals](https://user-images.githubusercontent.com/49361894/231329907-b6844808-83f5-4d2d-9b1b-4f49c35af31f.gif)
 ![delete-goals](https://user-images.githubusercontent.com/49361894/231329911-1db5d49a-ae4b-4639-9b0a-3130b4db785b.gif)
