@@ -1,10 +1,6 @@
 import { View, Text } from 'react-native';
 
-type Expense = {
-  amount: number,
-  description: string,
-  date: Date
-}
+import { Expense } from '../../types/Expense';
 
 interface ExpensesSummaryProps {
   expenses: Expense[],
@@ -18,7 +14,7 @@ function ExpensesSummary({expenses, periodName}: ExpensesSummaryProps) {
   return (
     <View>
       <Text>{periodName}</Text>
-      <Text>${expensesSum}.toFixed(2)</Text>
+      <Text>${expensesSum.toFixed(2)}</Text>
     </View>
   );
 }
