@@ -11,7 +11,12 @@ import IconButton from './components/UI/IconButton';
 
 import { GlobalStyles } from './constants/styles';
 
-const Stack = createNativeStackNavigator();
+type RootStackParamList = {
+  ManageExpense: {expenseId?: string}
+  ExpensesOverview: undefined
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 const BottomTabs = createBottomTabNavigator();
 
 function ExpensesOverview() {
@@ -57,14 +62,24 @@ export default function App() {
     <>
       <StatusBar style='light' />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: GlobalStyles.colors.primary500
+            }
+          }}
+        >
           <Stack.Screen 
             name='ExpensesOverview' 
             component={ExpensesOverview}
             options={{headerShown: false}} 
           />
           <Stack.Screen name='ManageExpense' 
-                        component={ManageExpense}/>
+                        component={ManageExpense}
+                        options={{
+                          presentation: 'modal'
+                        }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

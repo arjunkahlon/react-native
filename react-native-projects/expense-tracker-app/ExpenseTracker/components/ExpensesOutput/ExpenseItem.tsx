@@ -5,16 +5,19 @@ import { GlobalStyles } from "../../constants/styles";
 import { getFormattedDate } from "../../util/date";
 
 interface ExpenseItemProps {
+  id: string,
   description: string,
   amount: number,
   date: Date
 }
 
-function ExpenseItem({ description, amount, date }: ExpenseItemProps) {
+function ExpenseItem({ id, description, amount, date }: ExpenseItemProps) {
   const navigation = useNavigation();
 
   function expensePressHandler() {
-    navigation.navigate('ManageExpense' as never)
+    navigation.navigate('ManageExpense' as never, {
+      expenseId: id
+    } as never)
   }
 
   return (
