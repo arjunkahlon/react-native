@@ -1,9 +1,12 @@
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, TextInput, NativeSyntheticEvent, TextInputChangeEventData } from 'react-native'
 import { KeyboardType } from 'react-native'
 
 interface InputConfiguration {
-  keyboardType: KeyboardType,
-  maxLength: number,
+  keyboardType?: KeyboardType,
+  maxLength?: number,
+  placeholder?: string,
+  multiline?: boolean,
+  onChangeText?: (text: string) => void
 }
 
 interface InputProps {
