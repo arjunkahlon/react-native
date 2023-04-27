@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native'
-import { GestureResponderEvent } from "react-native";
+import { View, Text, StyleSheet, Alert } from 'react-native'
 
 import Input from './Input';
 import Button from '../UI/Button';
@@ -47,6 +46,15 @@ function ExpenseForm({onCancel, onSubmit, submitButtonLabel, defaultValues}: Exp
       date: new Date(inputValues.date),
       description: inputValues.description
     };
+
+    const amountValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
+    const dateIsValid = expenseData.date.toString() !== 'Invalid Date';
+    const descriptionIsValid = expenseData.description.trim().length > 0;
+
+    if (!amountValid || !dateIsValid || !descriptionIsValid) {
+      Alert.alert('Invalid input', 'Please check yout input values');
+      return;
+    }
 
     onSubmit(expenseData);
   }
