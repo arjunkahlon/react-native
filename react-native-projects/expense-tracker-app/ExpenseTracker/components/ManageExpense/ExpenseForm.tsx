@@ -4,6 +4,7 @@ import { GestureResponderEvent } from "react-native";
 
 import Input from './Input';
 import Button from '../UI/Button';
+import { Expense } from '../../types/Expense';
 
 type InputValues = {
   amount: string,
@@ -20,14 +21,15 @@ type ExpenseData = {
 interface ExpenseFormProps {
   onCancel: () => void,
   onSubmit: (expenseData: ExpenseData) => void,
-  submitButtonLabel: string
+  submitButtonLabel: string,
+  defaultValues: Expense | undefined
 }
 
-function ExpenseForm({onCancel, onSubmit, submitButtonLabel}: ExpenseFormProps) {
+function ExpenseForm({onCancel, onSubmit, submitButtonLabel, defaultValues}: ExpenseFormProps) {
   const [inputValues, setInputValues] = useState<InputValues>({
-    amount: '',
-    date: '',
-    description: ''
+    amount: defaultValues ? defaultValues.amount.toString() : '',
+    date: defaultValues ? defaultValues.date.toISOString().slice(0, 10) : '',
+    description: defaultValues ? defaultValues.description : ''
   });
 
   function inputChangeHandler(inputIdentifier: string, enteredValue: string) {

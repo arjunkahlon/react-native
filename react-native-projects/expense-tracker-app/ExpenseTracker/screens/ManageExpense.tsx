@@ -8,6 +8,7 @@ import IconButton from '../components/UI/IconButton';
 import Button from '../components/UI/Button';
 
 import { GlobalStyles } from '../constants/styles';
+import { Expense } from '../types/Expense';
 
 type RootStackParamList = {
   ManageExpense: {expenseId?: string},
@@ -27,6 +28,10 @@ function ManageExpense({route, navigation}: Props) {
 
   const editedExpenseId = route.params?.expenseId;
   const isEditing = !!editedExpenseId;
+
+  const selectedExpense = expensesContext.expenses.find((expense: Expense) => {
+    return expense.id === editedExpenseId;
+  })
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -64,6 +69,7 @@ function ManageExpense({route, navigation}: Props) {
         onCancel={cancelHandler}
         onSubmit={confirmHandler}
         submitButtonLabel= {isEditing ? 'Update' : 'Add'}
+        defaultValues = {selectedExpense}
       />
 
       {isEditing && (
