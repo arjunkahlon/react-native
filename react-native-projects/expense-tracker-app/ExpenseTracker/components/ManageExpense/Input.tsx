@@ -8,7 +8,8 @@ interface InputConfiguration {
   maxLength?: number,
   placeholder?: string,
   multiline?: boolean,
-  onChangeText?: (text: string) => void
+  onChangeText?: (enteredValue: string) => void,
+  value?: string
 }
 
 interface InputProps {

@@ -1,9 +1,52 @@
+import { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
+import { GestureResponderEvent } from "react-native";
+
 import Input from './Input';
+import Button from '../UI/Button';
 
-function ExpenseForm() {
-  function amountChangedHandler() {
+type InputValues = {
+  amount: string,
+  date: string,
+  description: string
+}
 
+type ExpenseData = {
+  description: string,
+  amount: number,
+  date: Date
+}
+
+interface ExpenseFormProps {
+  onCancel: () => void,
+  onSubmit: (expenseData: ExpenseData) => void,
+  submitButtonLabel: string
+}
+
+function ExpenseForm({onCancel, onSubmit, submitButtonLabel}: ExpenseFormProps) {
+  const [inputValues, setInputValues] = useState<InputValues>({
+    amount: '',
+    date: '',
+    description: ''
+  });
+
+  function inputChangeHandler(inputIdentifier: string, enteredValue: string) {
+    setInputValues((currInputValues) => {
+      return {
+        ...currInputValues,
+        [inputIdentifier]: enteredValue
+      }
+    })
+  }
+
+  function submitHandler() {
+    const expenseData = {
+      amount: +inputValues.amount,
+      date: new Date(inputValues.date),
+      description: inputValues.description
+    };
+
+    onSubmit(expenseData);
   }
   return (
     <View style={styles.form}>
@@ -13,7 +56,8 @@ function ExpenseForm() {
           label='Amount'
           textInputConfig={{
             keyboardType: 'decimal-pad',
-            onChangeText: amountChangedHandler
+            onChangeText: (enteredValue) => inputChangeHandler('amount', enteredValue),
+            value: inputValues.amount
           }}
           style={styles.rowInput}
         />
@@ -22,7 +66,8 @@ function ExpenseForm() {
           textInputConfig={{
             placeholder: 'YYYY-MM-DD',
             maxLength: 10,
-            onChangeText: () => {}
+            onChangeText: (enteredValue) => inputChangeHandler('date', enteredValue),
+            value: inputValues.date
           }}
           style={styles.rowInput}
         />
@@ -31,8 +76,25 @@ function ExpenseForm() {
         label='Description'
         textInputConfig = {{
           multiline: true,
+          onChangeText: (enteredValue) => inputChangeHandler('description', enteredValue),
+          value: inputValues.description
         }}
       />
+            <View style={styles.buttonsContainer}>
+        <Button 
+          mode='flat' 
+          onPress={onCancel}
+          style={styles.button}
+        >
+          Cancel
+        </Button> 
+        <Button
+          onPress={submitHandler}
+          style={styles.button}
+        >
+          {submitButtonLabel}
+        </Button>
+      </View>
 
     </View>
   )
@@ -58,5 +120,14 @@ const styles = StyleSheet.create({
   },
   rowInput:{
     flex: 1
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  button: {
+    minWidth: 120,
+    marginHorizontal: 8
   }
 })
