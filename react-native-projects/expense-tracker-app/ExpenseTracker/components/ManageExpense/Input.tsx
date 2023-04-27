@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, ViewStyle, StyleSheet } from 'react-native';
 import { KeyboardType } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 import { TextStyle } from 'react-native';
@@ -13,10 +13,11 @@ interface InputConfiguration {
 
 interface InputProps {
   label: string,
-  textInputConfig: InputConfiguration
+  textInputConfig: InputConfiguration,
+  style?: ViewStyle
 }
 
-function Input({label, textInputConfig}: InputProps) {
+function Input({label, textInputConfig, style}: InputProps) {
   const inputStyles: TextStyle[] = [styles.input];
 
   if (textInputConfig && textInputConfig.multiline) {
@@ -24,7 +25,7 @@ function Input({label, textInputConfig}: InputProps) {
   }
 
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, style]}>
       <Text style={styles.label}>{label}</Text>
       <TextInput style={inputStyles} {...textInputConfig} />
     </View>
