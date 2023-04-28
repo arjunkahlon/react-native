@@ -9,25 +9,30 @@ interface InputConfiguration {
   placeholder?: string,
   multiline?: boolean,
   onChangeText?: (enteredValue: string) => void,
-  value?: string
+  value?: string,
 }
 
 interface InputProps {
   label: string,
   textInputConfig: InputConfiguration,
-  style?: ViewStyle
+  style?: ViewStyle,
+  invalid?: boolean
 }
 
-function Input({label, textInputConfig, style}: InputProps) {
+function Input({label, textInputConfig, invalid, style}: InputProps) {
   const inputStyles: TextStyle[] = [styles.input];
 
   if (textInputConfig && textInputConfig.multiline) {
     inputStyles.push(styles.inputMultiline);
   }
 
+  if (invalid) {
+    inputStyles.push(styles.invalidInput);
+  }
+
   return (
     <View style={[styles.inputContainer, style]}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={[styles.label, invalid && styles.invalidLabel]}>{label}</Text>
       <TextInput style={inputStyles} {...textInputConfig} />
     </View>
   )
@@ -55,5 +60,11 @@ const styles = StyleSheet.create({
   inputMultiline: {
     minHeight: 100,
     textAlignVertical: 'top'
+  },
+  invalidLabel: {
+    color: GlobalStyles.colors.error500
+  },
+  invalidInput: {
+    backgroundColor: GlobalStyles.colors.error50
   }
 })
