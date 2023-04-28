@@ -34,8 +34,8 @@
 - [x] Section 6: React Native Navigation with React Navigation
 - [x] Section 7: App-wide State Management with Redux & Context
 - [x] Section 8: Time To Practice - The Expense Tracker App
-- [ ] Section 9: Handling User Input
-- [ ] Section 10: Sending HTTP Requests
+- [x] Section 9: Handling User Input
+- [x] Section 10: Sending HTTP Requests
 - [ ] Section 11: User Authentication
 - [ ] Section 12: Using Native Device Features (Camera, Location, & More)
 - [ ] Section 13: Building React Native Apps Without Expo
@@ -51,6 +51,21 @@
 
 
 ## Projects
+
+### ExpenseTracker
+
+A React Native + TypeScript application with which a user can add and manage expenses. Application is implemented with Tab Navigation between Recent and All Expenses as well as Stack Navigation between the screens for Viewing and Managing Expenses. A user can create, update, and delete an expense. An expense contains the amount in US dollars, a date, and a description. The ExpenseForm is implemented with input validation as well as validation feedback to the user.
+
+[Project Source Code](https://github.com/arjunkahlon/react-native/tree/main/react-native-projects/expense-tracker-app/ExpenseTracker)
+
+![add-expense](https://user-images.githubusercontent.com/49361894/235076795-543a475c-820e-457f-88d9-c9bd7d21bf83.gif)
+![edit-expense](https://user-images.githubusercontent.com/49361894/235076827-31f21cb9-bf69-4aae-84aa-4c0e9f680fd7.gif)
+![deleting-expenses](https://user-images.githubusercontent.com/49361894/235076994-6285b752-e73a-4462-88ff-9f4c57ce4d11.gif)
+![form-validation-add](https://user-images.githubusercontent.com/49361894/235075909-b935e49a-ef79-4644-9591-668670879918.gif)
+![form-validation-edit](https://user-images.githubusercontent.com/49361894/235075913-d6143913-ab51-4879-ba28-0579ffed8019.gif)
+![form-validation-empty](https://user-images.githubusercontent.com/49361894/235075915-4874f28f-d963-4e5d-90b2-19526675f654.gif)
+
+
 
 ### Meals
 
