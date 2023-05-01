@@ -46,15 +46,18 @@ function ManageExpense({route, navigation}: Props) {
     navigation.goBack();
   }
 
-  function confirmHandler(expenseData: ExpenseData) {
+  async function confirmHandler(expenseData: ExpenseData) {
     if (isEditing) {
       expensesContext.updateExpense(
         editedExpenseId, expenseData
       );
     } else {
-      storeExpense(expenseData);
+      const id = await storeExpense(expenseData);
       expensesContext.addExpense(
-        expenseData
+        {
+          ...expenseData,
+          id: id
+        }
       );
     }
     navigation.goBack();

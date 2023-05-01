@@ -5,7 +5,7 @@ import { Expense, ExpenseData } from "../types/Expense";
 
 export const ExpensesContext = createContext({
   expenses: [] as Expense[],
-  addExpense: ({description, amount, date}: ExpenseData) => {},
+  addExpense: ({description, amount, date, id}: Expense) => {},
   setExpenses: (expenses: Expense[]) => {},
   deleteExpense: (id: string) => {},
   updateExpense: (id: string, {description, amount, date}: ExpenseData) => {}
@@ -31,10 +31,10 @@ interface ExpensesState {
 function expensesReducer(state: Expense[], action: ExpensesAction) {
   switch (action.type) {
     case 'ADD':
-      const id = new Date().toString() + Math.random().toString();
-      return [{ ...action.payload, id: id }, ...state];
+      return [action.payload, ...state];
     case 'SET':
-      return action.payload;
+      const inverted = action.payload.reverse();
+      return inverted;
     case 'UPDATE':
       const updatableExpenseIndex = state.findIndex(
         (expense: Expense) => expense.id === action.payload.id);
@@ -59,7 +59,7 @@ interface ExpenseContextProviderProps {
 function ExpensesContextProvider({children}: ExpenseContextProviderProps) {
   const [expensesState, dispatch] = useReducer(expensesReducer, []);
 
-  function addExpense(expense: ExpenseData) {
+  function addExpense(expense: Expense) {
     dispatch({type: ExpenseActionKind.ADD, payload: expense });
   }
 
