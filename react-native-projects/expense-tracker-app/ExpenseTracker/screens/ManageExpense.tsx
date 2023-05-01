@@ -5,7 +5,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
 import { ExpensesContext } from '../store/ExpensesContext';
 import IconButton from '../components/UI/IconButton';
-import { storeExpense } from '../util/http';
+import { storeExpense, updateExpense, deleteExpense } from '../util/http';
 
 import { GlobalStyles } from '../constants/styles';
 import { Expense } from '../types/Expense';
@@ -35,8 +35,9 @@ function ManageExpense({route, navigation}: Props) {
     })
   }, [navigation, isEditing]);
 
-  function deleteExpenseHandler() {
+  async function deleteExpenseHandler() {
     if (editedExpenseId) {
+      await deleteExpense(editedExpenseId);
       expensesContext.deleteExpense(editedExpenseId);
     }
     navigation.goBack();
@@ -51,6 +52,7 @@ function ManageExpense({route, navigation}: Props) {
       expensesContext.updateExpense(
         editedExpenseId, expenseData
       );
+      await updateExpense(editedExpenseId, expenseData);
     } else {
       const id = await storeExpense(expenseData);
       expensesContext.addExpense(
