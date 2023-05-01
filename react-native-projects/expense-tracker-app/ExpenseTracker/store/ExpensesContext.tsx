@@ -1,14 +1,14 @@
 import { createContext, ReactNode, useReducer } from "react";
 
-import { Expense } from "../types/Expense";
+import { Expense, ExpenseData } from "../types/Expense";
 import { DUMMY_EXPENSES } from "../data/dummy-expenses";
 
 
 export const ExpensesContext = createContext({
   expenses: [] as Expense[],
-  addExpense: ({description, amount, date}: Expense) => {},
+  addExpense: ({description, amount, date}: ExpenseData) => {},
   deleteExpense: (id: string) => {},
-  updateExpense: (id: string, {description, amount, date}: Expense) => {}
+  updateExpense: (id: string, {description, amount, date}: ExpenseData) => {}
 });
 
 enum ExpenseActionKind {
@@ -56,7 +56,7 @@ interface ExpenseContextProviderProps {
 function ExpensesContextProvider({children}: ExpenseContextProviderProps) {
   const [expensesState, dispatch] = useReducer(expensesReducer, DUMMY_EXPENSES);
 
-  function addExpense(expense: Expense) {
+  function addExpense(expense: ExpenseData) {
     dispatch({type: ExpenseActionKind.ADD, payload: expense });
   }
 
@@ -64,7 +64,7 @@ function ExpensesContextProvider({children}: ExpenseContextProviderProps) {
     dispatch({type: ExpenseActionKind.DELETE, payload: id})
   }
 
-  function updateExpense(id: string, expense: Expense) {
+  function updateExpense(id: string, expense: ExpenseData) {
     dispatch({type: ExpenseActionKind.UPDATE, payload: {id: id, data: expense }})
   }
 
