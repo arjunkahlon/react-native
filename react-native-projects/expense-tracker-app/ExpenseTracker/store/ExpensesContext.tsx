@@ -1,18 +1,19 @@
 import { createContext, ReactNode, useReducer } from "react";
 
-import { Expense } from "../types/Expense";
-import { DUMMY_EXPENSES } from "../data/dummy-expenses";
+import { Expense, ExpenseData } from "../types/Expense";
 
 
 export const ExpensesContext = createContext({
   expenses: [] as Expense[],
-  addExpense: ({description, amount, date}: Expense) => {},
+  addExpense: ({description, amount, date, id}: Expense) => {},
+  setExpenses: (expenses: Expense[]) => {},
   deleteExpense: (id: string) => {},
-  updateExpense: (id: string, {description, amount, date}: Expense) => {}
+  updateExpense: (id: string, {description, amount, date}: ExpenseData) => {}
 });
 
 enum ExpenseActionKind {
   ADD = 'ADD',
+  SET = 'SET',
   UPDATE = 'UPDATE',
   DELETE = 'DELETE'
 }
@@ -30,8 +31,10 @@ interface ExpensesState {
 function expensesReducer(state: Expense[], action: ExpensesAction) {
   switch (action.type) {
     case 'ADD':
-      const id = new Date().toString() + Math.random().toString();
-      return [{ ...action.payload, id: id }, ...state]
+      return [action.payload, ...state];
+    case 'SET':
+      const inverted = action.payload.reverse();
+      return inverted;
     case 'UPDATE':
       const updatableExpenseIndex = state.findIndex(
         (expense: Expense) => expense.id === action.payload.id);
@@ -54,23 +57,28 @@ interface ExpenseContextProviderProps {
 
 
 function ExpensesContextProvider({children}: ExpenseContextProviderProps) {
-  const [expensesState, dispatch] = useReducer(expensesReducer, DUMMY_EXPENSES);
+  const [expensesState, dispatch] = useReducer(expensesReducer, []);
 
   function addExpense(expense: Expense) {
     dispatch({type: ExpenseActionKind.ADD, payload: expense });
+  }
+
+  function setExpenses(expenses: Expense[]) {
+    dispatch({type: ExpenseActionKind.SET, payload: expenses})
   }
 
   function deleteExpense(id: string) {
     dispatch({type: ExpenseActionKind.DELETE, payload: id})
   }
 
-  function updateExpense(id: string, expense: Expense) {
+  function updateExpense(id: string, expense: ExpenseData) {
     dispatch({type: ExpenseActionKind.UPDATE, payload: {id: id, data: expense }})
   }
 
   const value = {
     expenses: expensesState,
     addExpense: addExpense,
+    setExpenses: setExpenses,
     deleteExpense: deleteExpense,
     updateExpense: updateExpense
   };

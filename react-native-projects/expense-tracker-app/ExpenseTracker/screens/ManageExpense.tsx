@@ -5,10 +5,11 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
 import { ExpensesContext } from '../store/ExpensesContext';
 import IconButton from '../components/UI/IconButton';
-import Button from '../components/UI/Button';
+import { storeExpense, updateExpense, deleteExpense } from '../util/http';
 
 import { GlobalStyles } from '../constants/styles';
 import { Expense } from '../types/Expense';
+import { ExpenseData } from '../types/Expense';
 
 type RootStackParamList = {
   ManageExpense: {expenseId?: string},
@@ -17,11 +18,6 @@ type RootStackParamList = {
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ManageExpense'>;
 
-type ExpenseData = {
-  description: string,
-  amount: number,
-  date: Date
-}
 
 function ManageExpense({route, navigation}: Props) {
   const expensesContext = useContext(ExpensesContext);
@@ -39,8 +35,9 @@ function ManageExpense({route, navigation}: Props) {
     })
   }, [navigation, isEditing]);
 
-  function deleteExpenseHandler() {
+  async function deleteExpenseHandler() {
     if (editedExpenseId) {
+      await deleteExpense(editedExpenseId);
       expensesContext.deleteExpense(editedExpenseId);
     }
     navigation.goBack();
@@ -50,14 +47,19 @@ function ManageExpense({route, navigation}: Props) {
     navigation.goBack();
   }
 
-  function confirmHandler(expenseData: ExpenseData) {
+  async function confirmHandler(expenseData: ExpenseData) {
     if (isEditing) {
       expensesContext.updateExpense(
-        editedExpenseId, expenseData as never
+        editedExpenseId, expenseData
       );
+      await updateExpense(editedExpenseId, expenseData);
     } else {
+      const id = await storeExpense(expenseData);
       expensesContext.addExpense(
-        expenseData as never
+        {
+          ...expenseData,
+          id: id
+        }
       );
     }
     navigation.goBack();
